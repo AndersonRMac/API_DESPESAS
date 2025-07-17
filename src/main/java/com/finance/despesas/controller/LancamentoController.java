@@ -1,11 +1,11 @@
 package com.finance.despesas.controller;
 
+import com.finance.despesas.dto.LancamentoDto;
 import com.finance.despesas.model.Lancamento;
 import com.finance.despesas.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 
 @RestController
@@ -17,7 +17,9 @@ public class LancamentoController {
 
     @PostMapping
     public Lancamento salvaLancamento(@RequestBody Lancamento lancamento) {
-        return service.save(lancamento);
+        return service.salvaLancamento(new LancamentoDto(lancamento.getTipo(),
+                lancamento.getDescricao(),
+                lancamento.getValor()));
     }
 
     @DeleteMapping("/{id}")
@@ -27,10 +29,7 @@ public class LancamentoController {
 
     @GetMapping("/{id}")
     public String listarLancamentosById(@RequestBody @PathVariable Long id) {
-
-        String descricao = service.findById(id).getDescricao();
-        Double valor = service.findById(id).getValor();
-
-        return "Você selecionou o item: " + descricao + " - " + valor;
+        LancamentoDto dto = service.lancamentosPorId(id);
+        return "Você selecionou o item: " + dto.descricao() + " - " + dto.valor();
     }
 }
