@@ -9,6 +9,7 @@ import com.finance.despesas.repository.LancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +46,16 @@ public class LancamentoService {
         lancamento.setTipo(lancamento.getTipo());
 
         return lancamentoRepository.save(lancamento);
+    }
+
+    public Double somaDosLancamentos (LancamentoDto valorDto){
+        Double resultado = 0.0;
+        //1- pego tudo o que tem no banco e jogo dentro de lancamentos.
+        List<Lancamento> lancamentos = lancamentoRepository.findAll();
+
+        return lancamentos.stream()
+                .mapToDouble(Lancamento::getValor) //pega só o valor
+                .sum(); //soma todos os valores
     }
 
 

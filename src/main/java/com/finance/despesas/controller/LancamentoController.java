@@ -32,4 +32,8 @@ public class LancamentoController {
         LancamentoDto dto = service.lancamentosPorId(id);
         return "Você selecionou o item: " + dto.descricao() + " - " + dto.valor();
     }
+    @GetMapping("/soma")
+    public String somaEntradas(@RequestBody LancamentoDto dto){
+        return service.somaDosLancamentos(dto).toString();
+    }
 }
