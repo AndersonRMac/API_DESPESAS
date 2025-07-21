@@ -7,6 +7,7 @@ import com.finance.despesas.dto.LancamentoDto;
 import com.finance.despesas.model.Lancamento;
 import com.finance.despesas.repository.LancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,5 +57,16 @@ public class LancamentoService {
                 .sum(); //soma todos os valores
     }
 
+    public List<LancamentoDto> buscaLancamentosPorTipo(Integer tipo){
 
+        List<Lancamento> encontrados;
+
+        if (tipo != null){
+            encontrados = lancamentoRepository.findByTipo(tipo);
+        }else  encontrados = lancamentoRepository.findAll();
+
+        return encontrados.stream()
+                .map(l -> new LancamentoDto(l.getTipo(), l.getDescricao(), l.getValor()))
+                .collect(Collectors.toList());
+    }
 }

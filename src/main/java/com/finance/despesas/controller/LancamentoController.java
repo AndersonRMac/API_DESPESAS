@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -38,5 +39,10 @@ public class LancamentoController {
         return service.somaDosLancamentos(dto).toString();
     }
 
+    @GetMapping("/despesas")
+    public ResponseEntity<List<LancamentoDto>> listarLancamentos(@RequestParam Integer tipo){
+        List<LancamentoDto> entradas = service.buscaLancamentosPorTipo(tipo);
+        return ResponseEntity.ok(entradas);
+    }
 
 }
