@@ -8,8 +8,6 @@ import com.finance.despesas.model.Lancamento;
 import com.finance.despesas.repository.LancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,11 +37,11 @@ public class LancamentoService {
          lancamentoRepository.deleteById(id);
     }
 
-    public Lancamento salvaLancamento(LancamentoDto lancamentoDto){
+    public Lancamento salvaLancamento(LancamentoDto dto){
         Lancamento lancamento = new Lancamento();
-        lancamento.setDescricao(lancamento.getDescricao());
-        lancamento.setValor(lancamento.getValor());
-        lancamento.setTipo(lancamento.getTipo());
+        lancamento.setDescricao(dto.descricao());
+        lancamento.setValor(dto.valor());
+        lancamento.setTipo(dto.tipo());
 
         return lancamentoRepository.save(lancamento);
     }

@@ -3,7 +3,9 @@ package com.finance.despesas.controller;
 import com.finance.despesas.dto.LancamentoDto;
 import com.finance.despesas.model.Lancamento;
 import com.finance.despesas.service.LancamentoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,10 +18,9 @@ public class LancamentoController {
     public LancamentoService service;
 
     @PostMapping
-    public Lancamento salvaLancamento(@RequestBody Lancamento lancamento) {
-        return service.salvaLancamento(new LancamentoDto(lancamento.getTipo(),
-                lancamento.getDescricao(),
-                lancamento.getValor()));
+    public ResponseEntity<?> salvaLancamento(@RequestBody @Valid LancamentoDto dto) {
+       service.salvaLancamento(dto);
+       return ResponseEntity.ok("Registro salvo com sucesso!");
     }
 
     @DeleteMapping("/{id}")
@@ -36,4 +37,6 @@ public class LancamentoController {
     public String somaEntradas(@RequestBody LancamentoDto dto){
         return service.somaDosLancamentos(dto).toString();
     }
+
+
 }
