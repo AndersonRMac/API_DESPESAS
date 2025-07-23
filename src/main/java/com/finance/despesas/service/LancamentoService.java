@@ -7,7 +7,6 @@ import com.finance.despesas.dto.LancamentoDto;
 import com.finance.despesas.model.Lancamento;
 import com.finance.despesas.repository.LancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +47,6 @@ public class LancamentoService {
     }
 
     public Double somaDosLancamentos (LancamentoDto valorDto){
-        Double resultado = 0.0;
         //1- pego tudo o que tem no banco e jogo dentro de lancamentos.
         List<Lancamento> lancamentos = lancamentoRepository.findAll();
 
