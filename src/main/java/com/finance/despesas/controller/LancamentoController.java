@@ -1,7 +1,6 @@
 package com.finance.despesas.controller;
 
 import com.finance.despesas.dto.LancamentoDto;
-import com.finance.despesas.model.Lancamento;
 import com.finance.despesas.service.LancamentoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
